@@ -32,6 +32,12 @@ process.on("uncaughtException", (err) => {
 	console.log("SHUTTING DOWN");
 	process.exit(1);
 });
+
+
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger-output.json')
+// ? SWagger UI
+app.use('/api/v1/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 // ? 4-12  ROUTE ENDPOINTS
 app.use("/api/v1/id", require("./Routers/idRoute"));
 app.use("/api/v1/resident", require("./Routers/residentRoute"));
