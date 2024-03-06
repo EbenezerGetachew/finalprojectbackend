@@ -5,7 +5,7 @@
     "description": "this system is intended to enable residents to get issued and access to id renewal.",
     "version": "1.0.0"
   },
-  "host": "localhost:5000",
+  "host": "kebele-id-renewal-and-issuing-backend.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
   "paths": {
