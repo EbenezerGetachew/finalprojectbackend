@@ -35,9 +35,13 @@ const adminSchema = new mongoose.Schema({
 		minlength: 6,
 		select: false
 	},
+	kebele: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'Kebele'
+	},
 	role: {
 		type: String,
-		enum: ["Super Admin", "Admin"]
+		enum: ["Super Admin", "Admin", "Kebele Admin"]
 	}
 }, {timestamps: true});
 

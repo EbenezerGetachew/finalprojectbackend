@@ -3,6 +3,26 @@ const AppError = require("../ErrorHandler/appError");
 const Admin = require("./../Models/adminModel");
 const authUtils = require("../Utils/authUtils");
 
+
+// cool creator
+exports.StartSystem = catchAsync(async (req, res, next) => {
+	const data = req.body;
+	// checking if super user is already created .
+	const admins = await Admin.find()
+	if (admins.length > 1) { // Returning can't find the end point error if the system is already started.
+		next(new AppError(`can't find ${
+			req.originalUrl
+		} on our server`, 404));
+		return;
+	}
+	const newAdmin = await Admin.create(data);
+	res.status(201).json({
+		data: {
+			token,
+			newAdmin
+		}
+	});
+});
 // registration controller.
 exports.Register = catchAsync(async (req, res, next) => {
 	const data = req.body;
