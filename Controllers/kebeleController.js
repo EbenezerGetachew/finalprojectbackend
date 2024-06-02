@@ -29,14 +29,14 @@ exports.ReadMany = catchAsync(async (req, res, next) => { // !Authorization shou
 
 
 exports.Change = catchAsync(async (req, res, next) => { // !Authorization should be done here.
-	const kebele = req.params.kebele;
-	const _kebele = await Kebele.findByKebele(kebele);
+	const kebele = req.params.id;
+	const _kebele = await Kebele.findById(kebele);
 	if (! _kebele) {
 		next(new AppError("Kebele is not found", 404));
 		return;
 	}
 	const data = req.body;
-	const updatedKebele = await Kebele.findByKebeleAndUpdate(kebele, data, {
+	const updatedKebele = await Kebele.findByIdAndUpdate(kebele, data, {
 		new: true,
 		runValidators: false
 	});

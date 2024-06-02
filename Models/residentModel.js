@@ -21,6 +21,11 @@ const residentSchema = new mongoose.Schema({
 		required: [true, "Phone number is required to create a new resident account "]
 	},
 
+	kebele: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'Kebele',
+		required: true
+	},
 	password: {
 		type: String,
 		required: [

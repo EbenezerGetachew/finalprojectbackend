@@ -5,9 +5,11 @@
     "description": "this system is intended to enable residents to get issued and access to id renewal.",
     "version": "1.0.0"
   },
-  "host": "kebele-id-renewal-and-issuing-backend.onrender.com",
+  "host": "localhost:5000",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": [
+    "http"
+  ],
   "paths": {
     "/api/v1/id/": {
       "get": {
@@ -23,6 +25,23 @@
         "responses": {
           "201": {
             "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/id/in-my-kebele": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -91,6 +110,23 @@
         "responses": {
           "201": {
             "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/resident/in-my-kebele": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -267,6 +303,16 @@
           }
         }
       },
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/start-system": {
       "post": {
         "description": "",
         "responses": {

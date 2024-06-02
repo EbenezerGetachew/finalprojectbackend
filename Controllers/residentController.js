@@ -95,6 +95,24 @@ exports.Erase = catchAsync(async (req, res, next) => {
 	res.status(204).json({});
 });
 
+
+exports.ResidentInKebele = catchAsync(async (req, res, next) => { // Retrieve the kebele ID from the currently authenticated admin
+	const kebeleId = res.locals.admin.kebele.toString();
+	const residentInKebele = await Resident.find()
+	// .populate('farmer', 'fullName kebele').exec();
+	let residentsInKebele = [];
+	residentInKebele.forEach(resident => { // console.log(kebeleId.toString());
+
+		let kebeleNew = resident.kebele.toString();
+		if (kebeleNew == kebeleId) {
+			residentsInKebele.push(resident);
+		}
+	})
+	res.status(200).json({residentsInKebele});
+
+});
+
+
 // exports.ChangePasswordResident = catchAsync(async (req, res, next) => {
 // const id = req.params.id;
 // let resident = await Resident.findById(id).select("+password");

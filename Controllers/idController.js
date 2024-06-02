@@ -50,3 +50,20 @@ exports.Erase = catchAsync(async (req, res, next) => { // !Authorization should 
 	await Id.findByIdAndDelete(id);
 	res.status(201).json({msg: "sucess"});
 });
+
+
+exports.IdInKebele = catchAsync(async (req, res, next) => { // Retrieve the kebele ID from the currently authenticated admin
+	const kebeleId = res.locals.admin.kebele.toString();
+	const _idInKebele = await Id.find()
+	// .populate('farmer', 'fullName kebele').exec();
+	let _idsInKebele = [];
+	_idInKebele.forEach(_id => { // console.log(kebeleId.toString());
+
+		let kebeleNew = _id.resident.kebele.toString();
+		if (kebeleNew == kebeleId) {
+			_idsInKebele.push(_id);
+		}
+	})
+	res.status(200).json({_idsInKebele});
+
+});

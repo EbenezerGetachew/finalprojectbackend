@@ -8,7 +8,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const globalErrorHandler = require("./ErrorHandler/errorController");
 const AppError = require("./ErrorHandler/appError");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 require("dotenv").config();
 app.use(cors());
 connectDB();
@@ -40,6 +40,7 @@ const swaggerFile = require('./swagger-output.json')
 app.use('/api/v1/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 // ? 4-12  ROUTE ENDPOINTS
 app.use("/api/v1/id", require("./Routers/idRoute"));
+app.use("/api/v1/kebele", require("./Routers/kebeleRoute"));
 app.use("/api/v1/resident", require("./Routers/residentRoute"));
 app.use("/api/v1/serviceReview", require("./Routers/ServiceReviewRoute"));
 app.use("/api/v1/admin", require("./Routers/systemAdminRoute"));

@@ -6,8 +6,9 @@ const authUtils = require("../Utils/authUtils");
 
 // cool creator
 exports.StartSystem = catchAsync(async (req, res, next) => {
-	const data = req.body;
+	let data = req.body;
 	// checking if super user is already created .
+
 	const admins = await Admin.find()
 	if (admins.length > 1) { // Returning can't find the end point error if the system is already started.
 		next(new AppError(`can't find ${
@@ -15,7 +16,9 @@ exports.StartSystem = catchAsync(async (req, res, next) => {
 		} on our server`, 404));
 		return;
 	}
+	data.role = "Super Admin";
 	const newAdmin = await Admin.create(data);
+	const token = authUtils.signToken(newAdmin._id);
 	res.status(201).json({
 		data: {
 			token,
@@ -27,6 +30,7 @@ exports.StartSystem = catchAsync(async (req, res, next) => {
 exports.Register = catchAsync(async (req, res, next) => {
 	const data = req.body;
 	const newAdmin = await Admin.create(data);
+
 	const token = authUtils.signToken(newAdmin._id);
 	res.status(201).json({
 		data: {
@@ -84,8 +88,7 @@ exports.ReadMany = catchAsync(async (req, res, next) => {
 	const admins = await Admin.find();
 	res.status(200).json(admins);
 });
-
-exports.Change = catchAsync(async (req, res, next) => {
+exports.ReadKebeleAdmins = exports.Change = catchAsync(async (req, res, next) => {
 	const id = req.params.id;
 	const admin = await Admin.findById(id);
 	if (! admin) {

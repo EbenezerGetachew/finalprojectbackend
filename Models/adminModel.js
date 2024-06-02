@@ -41,7 +41,10 @@ const adminSchema = new mongoose.Schema({
 	},
 	role: {
 		type: String,
-		enum: ["Super Admin", "Admin", "Kebele Admin"]
+		enum: [
+			"Super Admin", "Admin", "Kebele Admin"
+		],
+		default: "Kebele Admin"
 	}
 }, {timestamps: true});
 
