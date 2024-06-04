@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const config = require("./Keys");
 const db = config.mongoURI;
+
+// this file used to instantiate the database connection.
 const connectDB = async () => {
 	try {
 		await mongoose.connect(db);

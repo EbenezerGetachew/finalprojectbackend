@@ -1,6 +1,5 @@
-// ! it doesn't work for me in this way.
-// require("dotenv").config();
-// ?  when you push comment mine.
+// keys
+// to expose the constants in the .env for the other modules.
 require("dotenv").config({path: "./Config/.env"});
 module.exports = {
 	mongoURI: process.env.DB_PRODUCTION,
