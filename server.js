@@ -44,12 +44,7 @@ app.use("/api/v1/kebele", require("./Routers/kebeleRoute"));
 app.use("/api/v1/resident", require("./Routers/residentRoute"));
 app.use("/api/v1/serviceReview", require("./Routers/ServiceReviewRoute"));
 app.use("/api/v1/admin", require("./Routers/systemAdminRoute"));
-
-
-// app.use("/api/v1/enrollment", require("./FourToTwelveTutor/Routers/enrollmentRoute"));
-// app.use("/api/v1/package", require("./FourToTwelveTutor/Routers/packageRoute"));
-// app.use("/api/v1/class", require("./FourToTwelveTutor/Routers/classRoute"));
-// app.use("/api/v1/course", require("./FourToTwelveTutor/Routers/courseRoute"));
+app.use("/api/v1/contact", require("./Routers/contactRoute"));
 
 
 // For showing the client 404 not found when searched for invalid  url.

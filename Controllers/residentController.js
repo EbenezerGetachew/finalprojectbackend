@@ -2,6 +2,7 @@ const catchAsync = require("./../ErrorHandler/catchAsync");
 const AppError = require("./../ErrorHandler/appError");
 const Resident = require("./../Models/residentModel");
 const authUtils = require("./../Utils/authUtils");
+const Id = require("./../Models/idModel");
 
 
 exports.Register = catchAsync(async (req, res, next) => {
@@ -112,6 +113,16 @@ exports.ResidentInKebele = catchAsync(async (req, res, next) => { // Retrieve th
 
 });
 
+exports.ResidentMyId = catchAsync(async (req, res, next) => {
+	const id = res.locals.id;
+	const resident = await Resident.findById(id);
+	if (resident) {
+		const id = await Id.findOne({resident: resident._id});
+		res.status(200).json({id});
+	} else {
+		res.status(404).json({message: "Resident not found"});
+	}
+})
 
 // exports.ChangePasswordResident = catchAsync(async (req, res, next) => {
 // const id = req.params.id;
