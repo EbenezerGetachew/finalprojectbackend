@@ -45,6 +45,7 @@ app.use("/api/v1/resident", require("./Routers/residentRoute"));
 app.use("/api/v1/serviceReview", require("./Routers/ServiceReviewRoute"));
 app.use("/api/v1/admin", require("./Routers/systemAdminRoute"));
 app.use("/api/v1/contact", require("./Routers/contactRoute"));
+app.use("/api/v1/dashboard", require("./Routers/dashboardRoute"));
 
 
 // For showing the client 404 not found when searched for invalid  url.
