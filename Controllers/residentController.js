@@ -50,6 +50,7 @@ exports.Login = catchAsync(async (req, res, next) => {
 
 exports.Read = catchAsync(async (req, res, next) => {
 	const id = req.params.id;
+	// const orders = await Order.find()
 	const resident = await Resident.findById(id);
 	if (! resident) {
 		next(new AppError("No resident found", 404));
@@ -60,7 +61,7 @@ exports.Read = catchAsync(async (req, res, next) => {
 });
 
 exports.ReadMany = catchAsync(async (req, res, next) => {
-	const residents = await Resident.find();
+	const residents = await Resident.find().populate("kebele", "name").exec();
 	res.status(200).json(residents);
 });
 
@@ -99,7 +100,7 @@ exports.Erase = catchAsync(async (req, res, next) => {
 
 exports.ResidentInKebele = catchAsync(async (req, res, next) => { // Retrieve the kebele ID from the currently authenticated admin
 	const kebeleId = res.locals.admin.kebele.toString();
-	const residentInKebele = await Resident.find()
+	const residentInKebele = await Resident.find().populate("kebele", "name").exec();
 	// .populate('farmer', 'fullName kebele').exec();
 	let residentsInKebele = [];
 	residentInKebele.forEach(resident => { // console.log(kebeleId.toString());

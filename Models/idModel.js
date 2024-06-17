@@ -21,13 +21,18 @@ const idSchema = new mongoose.Schema({
 		type: String,
 		enum: ["New", "Renewal"]
 	},
+	kebele: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'Kebele',
+		required: true
+	},
 	lastIdImage: {
 		type: String
 	},
 	status: {
 		type: String,
 		enum: [
-			"Up Coming", "Active", "Completed"
+			"Up Coming", "Active", "Completed", "Rejected"
 		],
 		default: "Up Coming",
 		required: true
