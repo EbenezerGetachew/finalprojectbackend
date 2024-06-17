@@ -85,7 +85,7 @@ exports.Read = catchAsync(async (req, res, next) => {
 
 
 exports.ReadMany = catchAsync(async (req, res, next) => {
-	const admins = await Admin.find();
+	const admins = await Admin.find().populate("kebele", "name").exec();
 	res.status(200).json(admins);
 });
 exports.ReadKebeleAdmins = exports.Change = catchAsync(async (req, res, next) => {
