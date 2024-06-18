@@ -44,7 +44,7 @@ exports.Change = catchAsync(async (req, res, next) => { // !Authorization should
 });
 
 exports.Erase = catchAsync(async (req, res, next) => { // !Authorization should be done here.
-	const kebele = req.params.kebele;
+	const kebele = req.params.id;
 	const _kebele = await Kebele.findByKebele(kebele);
 	if (! _kebele) {
 		next(new AppError("Kebele do not exist with this id", 404));
