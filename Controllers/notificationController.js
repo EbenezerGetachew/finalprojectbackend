@@ -10,5 +10,5 @@ exports.getMyNotification = catchAsync(async (req, res, next) => {
 		let resident = await Resident.findById(residentId);
 		notifications = await Notification.find({resident: resident._id})
 	}
-	res.status(201).json({notifications});
+	res.status(200).json({notifications});
 });
