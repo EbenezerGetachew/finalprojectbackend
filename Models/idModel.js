@@ -9,6 +9,9 @@ const idSchema = new mongoose.Schema({
 			type: String
 		}
 	],
+	photo: {
+		type: String
+	},
 	reservationDate: {
 		type: Date,
 		required: true

@@ -11,6 +11,47 @@ const residentSchema = new mongoose.Schema({
 		type: String,
 		required: [true, " last name is required "]
 	},
+	dob: {
+		type: Date,
+		required: true
+	},
+	gender: {
+		type: String,
+		enum: ["Male", "Female"]
+	},
+	placeOfBirth: {
+		type: String
+	},
+	countryFrom: {
+		type: String
+	},
+	emergencyContact: {
+		type: String
+	},
+	bloodGroup: {
+		type: String
+	},
+	houseNo: {
+		type: String
+	},
+	motherName: {
+		type: String
+	},
+	job: {
+		type: String
+	},
+	residentAddress: {
+		subcity: {
+			type: String
+		},
+		woreda: {
+			type: String
+		},
+		street: {
+			type: String
+		}
+
+	},
 	profile: {
 		type: String
 
