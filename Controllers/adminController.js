@@ -159,19 +159,19 @@ exports.ChangePassword = catchAsync(async (req, res, next) => {
 // for reseting password using sms or email.
 exports.ResetPassword = catchAsync(async (req, res, next) => {
 	const token = req.params.token;
-
-	let admin = {
-		role: "none"
-	};
-	admin = token ? await Admin.findOne({passwordResetToken: token}).select("+password") : admin;
+	let admin = token ? await Admin.findOne({passwordResetToken: token}).select("+password") : admin;
 	console.log(admin);
-	// excpet the new password .
-	const {newPassword} = req.body;
-	admin.password = newPassword;
-	admin.passwordResetToken = "None";
-	await admin.save({new: true, runValidators: false});
+	if (!(token && admin)) {
+		res.status(404).json({message: "The provided reset token is invalid "});
+		return;
+	} else { // excpet the new password .
+		const {newPassword} = req.body;
+		admin.password = newPassword;
+		admin.passwordResetToken = "None";
+		await admin.save({new: true, runValidators: false});
 
-	res.status(201).json({message: "password changed"});
+		res.status(201).json({message: "password changed"});
+	}
 });
 
 exports.ForgetPassword = catchAsync(async (req, res, next) => {
@@ -195,11 +195,12 @@ exports.ForgetPassword = catchAsync(async (req, res, next) => {
 		await admin.save(
 			{validateBeforeSave: false}
 		);
-		const resetUrl = `${
-			req.protocol
-		}://${
-			req.get('host')
-		}/api/v1/admin/reset-password/${resetToken}`;
+		// const resetUrl = `${
+		// req.protocol
+		// }://${
+		// req.get('host')
+		// }/api/v1/admin/reset-password/${resetToken}`;
+		const resetUrl = `https://kebele-admin-dashboard.vercel.app/reset-password/${resetToken}`;
 
 		const newMessage = `
 		Hi [${

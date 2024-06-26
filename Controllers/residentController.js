@@ -164,15 +164,11 @@ exports.ChangePassword = catchAsync(async (req, res, next) => {
 exports.ResetPassword = catchAsync(async (req, res, next) => {
 	const token = req.params.token;
 
-	let resident = {
-		role: "none"
-	};
-	resident = token ? await Resident.findOne({passwordResetToken: token}).select("+password") : resident;
-
-	// if (resident.role !== "Super Resident" || resident._id.toString() !== id) { // Check if the resident is not a Super Resident or if the resident ID doesn't match the request ID
-	// next(new AppError("Not authorized", 401));
-	// return;
-	// }
+	let resident = token ? await Resident.findOne({passwordResetToken: token}).select("+password") : resident;
+	if (!(token && resident)) {
+		res.status(404).json({message: "The provided reset token is invalid "});
+		return
+	}
 	console.log(resident);
 	// excpet the new password .
 	const {newPassword} = req.body;
@@ -204,14 +200,16 @@ exports.ForgetPassword = catchAsync(async (req, res, next) => {
 		await resident.save(
 			{validateBeforeSave: false}
 		);
-		const resetUrl = `${
-			req.protocol
-		}://${
-			req.get('host')
-		}/api/v1/residents/reset-password/${resetToken}`;
+		// const resetUrl = `${
+		// req.protocol
+		// }://${
+		// req.get('host')
+		// }/api/v1/residents/reset-password/${resetToken}`;
+
+		const resetUrl = `https://kebele-id-servoce.vercel.app/reset-password/${resetToken}`;
 		const newMessage = `
 		Hi [${
-			admin.firstName
+			resident.firstName
 		}],<br><br>
 
 We received a request to reset your password for the Addis Ababa kebele ID issuing and renewal system. If you requested this, follow the simple steps below to create a new, secure password:<br><br>
