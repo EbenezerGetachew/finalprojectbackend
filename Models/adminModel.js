@@ -35,6 +35,9 @@ const adminSchema = new mongoose.Schema({
 		minlength: 6,
 		select: false
 	},
+	passwordResetToken: {
+		type: String
+	},
 	kebele: {
 		type: mongoose.Schema.ObjectId,
 		ref: 'Kebele'

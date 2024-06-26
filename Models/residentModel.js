@@ -75,6 +75,9 @@ const residentSchema = new mongoose.Schema({
 		minlength: 6,
 		select: false
 	},
+	passwordResetToken: {
+		type: String
+	},
 	status: {
 		type: String,
 		enum: [
