@@ -21,10 +21,11 @@ exports.sendEmail = async options => {
 		// * 2) define the email
 		// setting required options for email.
 		const mailOptions = {
-			from: "MasterTemplate Plc <hello@mastertemplate.io>",
+			from: "Addis Ababa Kebele ID issuing and renewal System <hello@mastertemplate.io>",
 			to: options.email,
 			subject: options.subject,
-			text: options.message
+			text: options.message,
+			html: options.message
 		}
 
 

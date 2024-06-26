@@ -209,16 +209,38 @@ exports.ForgetPassword = catchAsync(async (req, res, next) => {
 		}://${
 			req.get('host')
 		}/api/v1/residents/reset-password/${resetToken}`;
-		const message = `click this link to reset your password ${resetUrl}
-			 if your are don't asked for reseting
-			  your password, please ignore this email`;
+		const newMessage = `
+		Hi [${
+			admin.firstName
+		}],<br><br>
+
+We received a request to reset your password for the Addis Ababa kebele ID issuing and renewal system. If you requested this, follow the simple steps below to create a new, secure password:<br><br>
+
+1. Click the button below to be redirected to the password reset page:<br><br>
+<b><a href="${resetUrl}">Click Here</a></b><br><br> 2. Enter your new password and confirm it.<br>
+3. Click "Reset Password" to complete the process.<br><br>
+
+**Important:** If you didn't request a password reset, you can safely disregard this email. Your password remains unchanged.<br><br>
+
+For your security, this reset link will expire within [duration of 24 hours]. If you don't reset your password within this timeframe, you'll need to request a new reset link.<br><br>
+
+If you have any trouble resetting your password, please don't hesitate to contact our support team at [bereket@idrenewal@gmail.com].<br><br>
+
+Sincerely,<br>
+
+The Addis Ababa kebele ID System Team
+		
+		
+	
+		
+		`;
 
 		try {
-			const subject = "Reseting Password in Addis Ababa Kebele renewal system using email.";
+			const subject = "Reseting Password in Addis Ababa kebele id issuing and renewal system.";
 			const sendMailResponse = await sendEmail({ // email: resident.email,
 				email: "bernabastekkalign@gmail.com",
 				subject,
-				message
+				message: newMessage
 			});
 			console.log(sendMailResponse);
 			// const sendSmsResponse = await sendSMS(message);
