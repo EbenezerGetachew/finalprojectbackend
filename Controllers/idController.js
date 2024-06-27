@@ -21,12 +21,14 @@ exports.Create = catchAsync(async (req, res, next) => {
 exports.Read = catchAsync(async (req, res, next) => {
 	const id = req.params.id;
 	const _id = await Id.findById(id).populate("kebele", "name").populate("resident", "firstName").exec();
+	const residentId = _id.resident._id;
+	const resident = await Resident.findById(residentId);
 	if (! _id) {
 		next(new AppError("No id found", 404));
 		return;
 	}
 
-	res.status(200).json({_id});
+	res.status(200).json({_id, resident});
 });
 
 exports.ReadMany = catchAsync(async (req, res, next) => { // !Authorization should be done here.

@@ -134,10 +134,6 @@ exports.ResidentMyId = catchAsync(async (req, res, next) => {
 exports.ChangePassword = catchAsync(async (req, res, next) => {
 	const id = req.params.id;
 	let resident = await Resident.findById(id).select("+password");
-	if (resident.role !== "Super Resident" || resident._id.toString() !== id) { // Check if the resident is not a Super Resident or if the resident ID doesn't match the request ID
-		next(new AppError("Not authorized", 401));
-		return;
-	}
 	const {oldPassword, newPassword} = req.body;
 	const isMatch = await bcrypt.compare(oldPassword, resident.password);
 
