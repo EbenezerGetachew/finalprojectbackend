@@ -231,8 +231,10 @@ The Addis Ababa kebele ID System Team
 
 		try {
 			const subject = "Reseting Password in Addis Ababa kebele id issuing and renewal system.";
-			const sendMailResponse = await sendEmail({ // email: admin.email,
-				email: "bernabastekkalign@gmail.com",
+			const sendMailResponse = await sendEmail({
+				// email: admin.email,
+				// email: "bernabastekkalign@gmail.com",
+				email: "bereketteshome@143@gmail.com",
 				subject,
 				message: newMessage
 			})

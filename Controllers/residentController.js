@@ -206,7 +206,7 @@ exports.ForgetPassword = catchAsync(async (req, res, next) => {
 		// req.get('host')
 		// }/api/v1/residents/reset-password/${resetToken}`;
 
-		const resetUrl = `https://kebele-id-servoce.vercel.app/reset-password/${resetToken}`;
+		const resetUrl = `https://kebele-id-service.vercel.app/reset-password/${resetToken}`;
 		const newMessage = `
 		Hi [${
 			resident.firstName
@@ -235,8 +235,10 @@ The Addis Ababa kebele ID System Team
 
 		try {
 			const subject = "Reseting Password in Addis Ababa kebele id issuing and renewal system.";
-			const sendMailResponse = await sendEmail({ // email: resident.email,
-				email: "bernabastekkalign@gmail.com",
+			const sendMailResponse = await sendEmail({
+				// email: resident.email,
+				// email: "bernabastekkalign@gmail.com",
+				email: "bereketteshome@143@gmail.com",
 				subject,
 				message: newMessage
 			});
